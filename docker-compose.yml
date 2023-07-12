@@ -1,0 +1,21 @@
+version: '3'
+services:
+  python3:
+    restart: always
+    build: .
+    container_name: 'py3-container'
+    working_dir: '/var/docker-python'
+    tty: true
+    volumes:
+      - ./app:/var/docker-python/app
+
+    entrypoint: >
+      jupyter-lab
+      --allow-root
+      --ip=0.0.0.0
+      --port=8888
+      --no-browser
+      --NotebookApp.token=''
+      --notebook-dir=/var/docker-python/app
+    ports:
+    - 8888:8888
